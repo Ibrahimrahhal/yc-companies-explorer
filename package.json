@@ -1,0 +1,91 @@
+{
+  "name": "yc-companies-explorer",
+  "version": "0.1.0",
+  "description": "Local-first desktop explorer for Y Combinator startups — daily feed, saves, and offline cache",
+  "main": "./out/main/index.js",
+  "author": "Ibrahim Rahhal",
+  "license": "MIT",
+  "homepage": "https://github.com/Ibrahimrahhal/yc-companies-explorer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ibrahimrahhal/yc-companies-explorer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ibrahimrahhal/yc-companies-explorer/issues"
+  },
+  "keywords": [
+    "ycombinator",
+    "yc",
+    "startups",
+    "electron",
+    "desktop-app",
+    "react",
+    "local-first",
+    "feed",
+    "yc-companies"
+  ],
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "dist": "npm run build && electron-builder --win",
+    "dist:dir": "npm run build && electron-builder --win --dir",
+    "dist:all": "npm run build && electron-builder -mwl",
+    "typecheck": "tsc --noEmit -p tsconfig.web.json && tsc --noEmit -p tsconfig.node.json"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.7.2"
+  },
+  "build": {
+    "appId": "com.ycexplorer.app",
+    "productName": "YC Explorer",
+    "copyright": "Copyright © 2026 Ibrahim Rahhal",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-setup.${ext}"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.productivity",
+      "artifactName": "${productName}-${version}-mac-${arch}.${ext}"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Office",
+      "artifactName": "${productName}-${version}-linux-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
