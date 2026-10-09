@@ -1,9 +1,13 @@
 {
   "name": "yc-companies-explorer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Local-first desktop explorer for Y Combinator startups — daily feed, saves, and offline cache",
   "main": "./out/main/index.js",
-  "author": "Ibrahim Rahhal",
+  "author": {
+    "name": "Ibrahim Rahhal",
+    "email": "24377288+Ibrahimrahhal@users.noreply.github.com",
+    "url": "https://github.com/Ibrahimrahhal"
+  },
   "license": "MIT",
   "homepage": "https://github.com/Ibrahimrahhal/yc-companies-explorer",
   "repository": {
@@ -81,6 +85,7 @@
         "deb"
       ],
       "category": "Office",
+      "maintainer": "Ibrahim Rahhal <24377288+Ibrahimrahhal@users.noreply.github.com>",
       "artifactName": "${productName}-${version}-linux-${arch}.${ext}"
     },
     "nsis": {

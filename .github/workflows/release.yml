@@ -83,7 +83,7 @@ jobs:
     name: Publish GitHub Release
     needs: build
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.tag != ''
+    if: always() && (startsWith(github.ref, 'refs/tags/v') || github.event.inputs.tag != '') && (needs.build.result == 'success' || needs.build.result == 'failure')
 
     steps:
       - name: Checkout
@@ -95,6 +95,7 @@ jobs:
           path: dist-binaries
           pattern: binaries-*
           merge-multiple: true
+          if-no-files-found: error
 
       - name: List binaries
         run: find dist-binaries -type f | sort
@@ -106,7 +107,8 @@ jobs:
           name: ${{ github.event.inputs.tag || github.ref_name }}
           draft: false
           generate_release_notes: true
-          files: dist-binaries/*
+          files: |
+            dist-binaries/**
           fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
