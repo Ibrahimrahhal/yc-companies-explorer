@@ -95,7 +95,6 @@ jobs:
           path: dist-binaries
           pattern: binaries-*
           merge-multiple: true
-          if-no-files-found: error
 
       - name: List binaries
         run: find dist-binaries -type f | sort
