@@ -35,6 +35,7 @@
     "dist": "npm run build && electron-builder --win",
     "dist:dir": "npm run build && electron-builder --win --dir",
     "dist:all": "npm run build && electron-builder -mwl",
+    "test": "node --no-warnings --test src/main/url.test.ts",
     "typecheck": "tsc --noEmit -p tsconfig.web.json && tsc --noEmit -p tsconfig.node.json"
   },
   "devDependencies": {

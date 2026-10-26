@@ -4,6 +4,7 @@ import { LocalStore } from './storage'
 import { getFeedPage, getSavedStartups, ensureDailyFeed, rebuildDailyFeed } from './feed'
 import { shouldAutoSync, syncYC } from './yc-api'
 import { todayKey } from './batch'
+import { openSafeExternal } from './url'
 
 let mainWindow: BrowserWindow | null = null
 let store: LocalStore
@@ -115,7 +116,7 @@ function createWindow(): void {
   })
 
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
-    shell.openExternal(url)
+    void openSafeExternal(url, shell.openExternal)
     return { action: 'deny' }
   })
 
@@ -170,9 +171,7 @@ function registerIpc(): void {
   })
 
   ipcMain.handle('shell:openExternal', async (_e, url: string) => {
-    if (url.startsWith('http://') || url.startsWith('https://')) {
-      await shell.openExternal(url)
-    }
+    await openSafeExternal(url, shell.openExternal)
   })
 
   ipcMain.handle('shell:openDataDir', async () => {
